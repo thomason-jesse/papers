@@ -25,7 +25,7 @@
 \newcommand{\setfiguresize}{\normalsize}
 
 \title{Jointly Improving Parsing and Perception for Natural Language Commands through Human-Robot Dialog}
-\author{{\color{blue}\bf \large Jesse Thomason},$^*$ Aishwarya Padmakumar,$^\dagger$ Jivko Sinapov,$^\ddagger$ Nick Walker,$^*$ Yuqian Jiang,$^\dagger$\\Harel Yedidsion,$^\dagger$ Justin Hart,$^\dagger$ Peter Stone,$^\dagger$ and Raymond J. Mooney$^\dagger$}
+\author{{\texorpdfstring{\color{blue} \bf \large}{ } Jesse Thomason},$^*$ Aishwarya Padmakumar,$^\dagger$ Jivko Sinapov,$^\ddagger$ Nick Walker,$^*$ Yuqian Jiang,$^\dagger$\\Harel Yedidsion,$^\dagger$ Justin Hart,$^\dagger$ Peter Stone,$^\dagger$ and Raymond J. Mooney$^\dagger$}
 \institute{$^*$University of Washington;\\$^\dagger$University of Texas at Austin; $^\ddagger$Tufts University}
 
 \date{\today}
@@ -55,12 +55,12 @@ We present an end-to-end pipeline for translating natural language commands to r
   \begin{subfigure}{0.9\textwidth}
     \centering
     \includegraphics[width=\linewidth]{figures/rattling_ask.pdf}
-    \vspace{-5.5cm}
+    \vspace{-4cm}
   \end{subfigure}
   \begin{subfigure}{0.92\textwidth}
     \centering
     \includegraphics[width=\linewidth]{figures/rattling_think.pdf}
-    \vspace{-5.5cm}
+    \vspace{-4cm}
   \end{subfigure}
 \end{figure}
 Through dialog, a robot agent can acquire task-relevant information from a human on the fly.
@@ -100,6 +100,11 @@ Learning these models while retraining the semantic parser connects words to con
   \vspace{1mm}
 \justifying{\Huge
 Asking questions can help a robot understand compositional language and grounded word meanings during human-robot dialogs.
+}
+\paragraphbreak
+
+{\Large
+Talk to the agent! \url{https://bit.ly/2W3jiJP}.
 }
 \end{block}
 
@@ -266,31 +271,28 @@ Across tasks, the \emph{Trained (Parsing+Perception)} agent is rated as more usa
 
 \begin{figure}
 \centering
-\begin{tabular}[t!]{cccc}
-  \multicolumn{4}{c}{\bf Learned Concept Model for \emph{can}} \\
-  \includegraphics[width=0.22\linewidth]{figures/oidx_26.jpg} &
-  \includegraphics[width=0.22\linewidth]{figures/oidx_13.jpg} &
-  \includegraphics[width=0.22\linewidth]{figures/oidx_11.jpg} &
-  \includegraphics[width=0.22\linewidth]{figures/oidx_25.jpg} \\
-  0.32 & 0.22 & 0.2 & 0.13 \\
-  \includegraphics[width=0.22\linewidth]{figures/oidx_12.jpg} &
-  \includegraphics[width=0.22\linewidth]{figures/oidx_22.jpg} &
-  \includegraphics[width=0.22\linewidth]{figures/oidx_6.jpg} &
-  \includegraphics[width=0.22\linewidth]{figures/oidx_28.jpg} \\
-  0.07 & 0.03 & 0.03 & 0 \\
+\begin{tabular}[t!]{ccc}
+  \multicolumn{3}{c}{\bf Learned Concept Model for \emph{can}} \\
+  \includegraphics[width=0.3\linewidth]{figures/oidx_26.jpg} &
+  \includegraphics[width=0.3\linewidth]{figures/oidx_13.jpg} &
+  \includegraphics[width=0.3\linewidth]{figures/oidx_11.jpg} \\
+  0.32 & 0.22 & 0.2 \\
+  \includegraphics[width=0.3\linewidth]{figures/oidx_25.jpg} &
+  \includegraphics[width=0.3\linewidth]{figures/oidx_12.jpg} &
+  \includegraphics[width=0.3\linewidth]{figures/oidx_22.jpg} \\
+  0.13 & 0.07 & 0.03 \\
+  \includegraphics[width=0.3\linewidth]{figures/oidx_6.jpg} &
+  \includegraphics[width=0.3\linewidth]{figures/oidx_28.jpg} \\
+  0.03 & 0 \\
 \end{tabular}
 \end{figure}
 Confidence distribution for the \emph{can} concept model on the unseen test set objects after training.
 In total, the agent learned 25 new concept models, as well as synonym words for existing concepts, during training.
-\paragraphbreak
 
-\textbf{Conclusion.} We present a robotic agent that leverages conversations with humans to expand its language understanding capabilities for semantic parsing and grounding concepts to physical object properties.
-We make several key assumptions that future work can weaken.
-In this work, robot actions can be broken down into tuples of discrete semantic roles, but agents need to reason about continuous action spaces in many cases.
-We also assume human users are cooperative, but detecting and dealing with combative users is necessary for real world deployment.
-Making a closed world assumption, our agent has explored all available objects in the environment to acquire multi-modal feature representations, but a more robust approach would detect and explore objects on the fly.
-Finally, dealing with non-compositional phrases (e.g., a \emph{fake gun} is \emph{fake} but is not a \emph{gun}) and graded adjectives (e.g., a \emph{heavy} mug weighs less than a \emph{light} suitcase) is necessary to move beyond categorical object properties like \emph{can}.
-We hope that our agent and learning strategies for an end-to-end dialog system with perceptual connections to the real world inspire further research on grounded human-robot dialog for command understanding.
+\begin{figure}
+\centering
+  \includegraphics[width=0.7\linewidth]{QR.png}
+\end{figure}
 
 }
 \end{block}
