@@ -46,13 +46,13 @@
 
 % Poster text sizes.
 \newcommand{\setblocksize}{\LARGE \centering}
-\newcommand{\setsize}{\large}
-\newcommand{\setcentersize}{\Large}
+\newcommand{\setsize}{\Large}
+\newcommand{\setcentersize}{\LARGE}
 \newcommand{\paragraphbreak}{\vspace{1cm}}
 
 \title{Shifting the Baseline:\\Single Modality Performance on Visual Navigation \& QA}
 \author{Jesse Thomason, Daniel Gordon, and Yonatan Bisk}
-\institute{{\texorpdfstring{\color{blue} \bf \large}{ } Jesse Thomason}, Daniel Gordon, and Yonatan Bisk\\University of Washington}
+\institute{{\texorpdfstring{\color{blue} \bf \huge}{ } Jesse Thomason}, Daniel Gordon, and Yonatan Bisk\\University of Washington}
 
 \date{\today}
 
@@ -68,14 +68,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{column}{.24\linewidth}    %%% COLUMN 1 %%%
 
-\begin{block}{\setblocksize Why Unimodal Baselines?}
+\begin{block}{\setblocksize Unimodal Baselines}
 %\vspace{-30pt}
 	\vspace{1mm}
 \justifying{\setsize
-We demonstrate the surprising strength of unimodal baselines in multimodal domains, and make concrete recommendations for best practices in future research.
-Where existing work often compares against \textit{random} or \textit{majority class} baselines, 
-we argue that unimodal approaches better capture and reflect dataset biases and therefore
-provide an important comparison when assessing the performance of multimodal techniques.
+We demonstrate the strength of unimodal baselines in multimodal domains.
+We argue that unimodal approaches better capture and reflect dataset biases than random or majority class baselines, and therefore provide an important comparison when assessing the performance of multimodal techniques.
 
 }
 \end{block}
@@ -85,15 +83,7 @@ provide an important comparison when assessing the performance of multimodal tec
   \vspace{1mm}
 \justifying{\setsize
 
-In the visual navigation and egocentric question answering tasks, at each timestep an agent receives an observation and produces an action.
-Actions can move the agent to a new location or heading (e.g., \textit{turn left}), or answer questions (e.g., \textit{answer `brown'}).
-At timestep $t$, a multimodal model \model{} takes in a visual input \visionin$_t$ and language question or navigation command \languagein{} to predict the next action $a_t$.
-The navigation models we examine also take in their own action from the previous timestep, \historyin{}$_{t-1}$, and `minimally sensed' world information $W$ specifying which actions are available (e.g., that \textit{forward} is unavailable if the agent is facing a wall).
-\begin{equation}
-    a_t \leftarrow \mmodel(\mvisionin_t, \mlanguagein, \mhistoryin_{t-1}; W)
-\end{equation} 
-
-We ablate benchmark models from three recent papers:
+We ablate benchmark models from:
 
 \begin{enumerate}
 \item \textbf{Matterport} Room-2-Room Navigation -- (\textit{Anderson et al., CVPR'18});
@@ -101,26 +91,34 @@ We ablate benchmark models from three recent papers:
 \item \textbf{EQA} Embodied Question Answering -- (\textit{Das et al., CVPR'18}).
 \end{enumerate}
 
-In each benchmark task, \model{} corresponds to the author's released code and training paradigm.
-In addition to their full model, we evaluate the role of each input modality by removing those inputs and replacing them with zero vectors.
-Formally, we define the full model and three ablations:
-
+We define three ablations:
 \vspace{-10pt}
-\begin{align}
+\begin{align*}
     &\text{Full Model} & \mathrm{is} && \mmodel(\mvisionin_t, \mlanguagein, \mhistoryin_{t-1}; W) \\
     &\mathcal{A} & \mathrm{is} && \mmodel(\hspace{3pt}\mzero\hspace{2pt},\hspace{1pt} \mzero\hspace{2pt}, \mhistoryin_{t-1}; W) \\
     &\mathcal{A+V} & \mathrm{is}& & \mmodel(\mvisionin_t,\hspace{1pt} \mzero\hspace{2pt}, \mhistoryin_{t-1}; W)\\
     &\mathcal{A+L} & \mathrm{is}& & \mmodel(\hspace{3pt}\mzero\hspace{2pt}, \mlanguagein, \mhistoryin_{t-1}; W)
-\end{align}
-corresponding to models with access to $\mathbfcal{A}$ction inputs, $\mathbfcal{V}$ision inputs, and $\mathbfcal{L}$anguage inputs.
-These ablations preserve the architecture and number of parameters of \model{} by changing only its inputs.
+\end{align*}
+with $\mathbfcal{A}$ction inputs, $\mathbfcal{V}$ision inputs, and $\mathbfcal{L}$anguage inputs.
+
+At each timestep an agent receives an observation and produces an action.
+\begin{equation}
+    a_t \leftarrow \mmodel(\mvisionin_t, \mlanguagein, \mhistoryin_{t-1}; W)
+\end{equation} 
 \paragraphbreak
 
 \begin{figure}[t]
 \includegraphics[width=\columnwidth]{figures/matterport_actions_squeeze_top_big.pdf}
 \centering
 \end{figure}
-$P(act=col | prev=row)$ and marginal action distributions in Matterport training data reveal peakiness that enables agents to memorize simple rules like not turning left immediately after turning right, and to move forward an average number of steps.
+$P(act=col | prev=row)$ and marginal action distributions in Matterport data reveal memorizable peakiness.
+\paragraphbreak
+
+\begin{figure}[t]
+\includegraphics[width=\columnwidth]{figures/THOR_Question_Image2.pdf}
+\centering
+\end{figure}
+Relevant visual observations are made after navigating to an implicit goal point in QA tasks.
 
 }
 \end{block}
@@ -130,19 +128,19 @@ $P(act=col | prev=row)$ and marginal action distributions in Matterport training
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{column}{.49\linewidth}    %%% COLUMN 2 %%%
 
-\begin{block}{\setblocksize }
+\begin{block}{\setblocksize Punchline}
 %\vspace{-30pt}
   \vspace{1mm}
 \justifying{\Huge
-Language-only and vision-only VLN and QA models outperform published baselines and even beat their multi-modal counterparts.
+Language-only and vision-only VLN and QA models outperform published baselines and even beat their multi-modal counterparts!
 }
 \paragraphbreak
 
 \justifying{\setcentersize
-\begin{tabular}{p{650pt}p{150pt}}
-\textbf{Recommendation for Best Practices:} Our findings show that in the new space of visual navigation and egocentric QA, all modalities, even an agent's action history, are strongly informative.  Therefore, while many papers ablate either language \textit{or} vision, researchers should ablate \textit{both}.
+\begin{tabular}{p{800pt}p{150pt}}
+\textbf{Recommendation for Best Practices:} While many papers ablate either language \textit{or} vision, researchers should ablate \textit{both}.
 These unimodal baselines expose possible gains from single-modality biases in multimodal datasets irrespective of training and architecture details. &
-\raisebox{-0.9\height}{\includegraphics[width=0.45\columnwidth]{QR.png}}
+\raisebox{-0.85\height}{\includegraphics[width=0.35\columnwidth]{QR.png}}
 \end{tabular}
 
 }
@@ -183,9 +181,12 @@ The vision only model finds and reports salient color and room feature as answer
 	\vspace{1mm}
 \justifying{\setsize
 
-\textbf{Visual Navigation} is evaluated across all three tasks.
-Best unimodal ablations are bolded; {\color{blue}blue} indicates better than reported baseline; and $^*$ indicates better than full model.
+Best unimodal in \textbf{bold}, {\color{blue}blue} indicates better than baseline; and $^*$ indicates better than full model.
 
+\paragraphbreak
+\textbf{Visual Navigation.}
+
+{\setsize \large
 \begin{table}
 \centering
 \begin{tabular}{@{}l@{\hspace{5pt}}l@{\hspace{5pt}}r@{\hspace{5pt}}r@{\hspace{13pt}}r@{\hspace{5pt}}r@{\hspace{13pt}}r@{\hspace{0pt}}}
@@ -205,7 +206,9 @@ Best unimodal ablations are bolded; {\color{blue}blue} indicates better than rep
   \bottomrule
 \end{tabular}
 \end{table}
-Trained via behavior cloning, unimodal ablations outperform published baselines in all cases and full models for Matterport and EQA.
+}
+Training via behavior cloning.
+\paragraphbreak
 
 \begin{table}
 \centering
@@ -225,7 +228,8 @@ Trained via behavior cloning, unimodal ablations outperform published baselines 
   \bottomrule
 \end{tabular}
 \end{table}
-Using student forcing, unimodal ablations are no less competitive on unseen environments, but can still memorize seen environments well.
+Training via student forcing.
+\paragraphbreak
 
 \begin{table}
 \centering
@@ -244,9 +248,11 @@ Using student forcing, unimodal ablations are no less competitive on unseen envi
   $\Delta$ & Uni -- Base\phantom{0} & \bad{-0.127} & \bad{-0.10} & +0.10 \\
   \bottomrule
 \end{tabular}
-
+\end{table}
+EQA navigation final distance.
 \paragraphbreak
 
+\begin{table}
 \begin{tabular}{@{}l@{\hspace{10pt}}l@{\hspace{10pt}}r@{\hspace{10pt}}r@{\hspace{10pt}}r@{\hspace{10pt}}}
     & & \multicolumn{3}{@{}c@{}}{$\mathbf{d_{min}}\downarrow$} \\
     & & \multicolumn{3}{@{}c@{}}{(\textit{m})} \\
@@ -263,11 +269,11 @@ Using student forcing, unimodal ablations are no less competitive on unseen envi
   \bottomrule
 \end{tabular}
 \end{table}
-EQA navigation across two metrics and three distance settings reveal that, across paradigms, a unimodal ablation can outperform a full model on the task.
+EQA navigation closest distance.
 \paragraphbreak
 
-\textbf{Question Answering} is evaluated on the IQA and EQA tasks.
-\paragraphbreak
+\textbf{Question Answering.}
+\paragraphbreak 
 
 \begin{table}
 \centering
@@ -286,8 +292,7 @@ EQA navigation across two metrics and three distance settings reveal that, acros
     \bottomrule
 \end{tabular}
 \end{table}
-In question answering, unimodal ablations outperform published baselines in all cases.
-Ablations are not competitive with full models, particularly on the intentionally class-balanced IQA dataset.
+Question answering accuracy.
 
 }
 \end{block}
