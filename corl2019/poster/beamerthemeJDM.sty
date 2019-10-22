@@ -1,0 +1,165 @@
+%
+
+\ProvidesPackage{beamerthemeJDM} % this style was created by Bonnie Merchant
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\selectcolormodel{cmyk}
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% custom colors
+\definecolor{i6blue}{cmyk}{1,0.305,0,0.06}
+\definecolor{i6bluedark}{rgb}{0.0156,0.2578,0.5625} 
+% Use this site to chose new colors to define for the poster:    http://html-color-codes.com/
+\definecolor{JDMscheme1}{HTML}{FFFFFF}  % e.g. for block title text (Abstract, background, etc)
+\definecolor{JDMscheme2}{HTML}{000000}  % e.g. title in headline 
+\definecolor{JDMscheme3}{HTML}{FFFFFF}  % e.g. for poster background (KEEP as white for the background of poster)
+\definecolor{JDMscheme4}{HTML}{4b2e83} % e.g. for block titles background 
+\definecolor{JDMHeadline}{HTML}{FFFFFF}  % for headline background
+\definecolor{JDMFootline}{HTML}{4b2e83}  % for footline background
+\definecolor{JDMalert}{HTML}{CC0000}  % for for alert
+\definecolor{JDMline}{HTML}{4b2e83}  % for line after title
+
+\definecolor{uwgold}{HTML}{b7a57a}
+\definecolor{uwmetal}{HTML}{85754d}
+
+%FF8100
+
+% headline colors and fonts
+\setbeamercolor{headline}{fg=white, bg=JDMHeadline}
+\setbeamercolor{title in headline}{fg=black}
+\setbeamercolor{author in headline}{fg=black}
+\setbeamercolor{institute in headline}{fg=black}
+\setbeamercolor{logo in headline}{fg=black}
+\setbeamercolor{separation line}{bg=JDMline}
+
+% footline colors and fonts
+\setbeamercolor{footline}{fg=JDMscheme1,bg=JDMFootline}
+\setbeamerfont{footline}{size=\huge}
+
+% body colors and fonts
+\setbeamercolor*{normal text}{fg=black,bg=JDMscheme3}
+
+% block environment
+\setbeamercolor*{block body}{bg=white,fg=black}
+\setbeamercolor*{block title}{fg=JDMscheme1,bg=JDMscheme4}
+\setbeamerfont{block title}{size=\normalsize,series=\bf}
+
+% example environment
+%\setbeamercolor*{example title}{fg=white,bg=JDMscheme1}
+%\setbeamerfont{example title}{size=\large,series=\bf,bg=JDMscheme1,fg=white}
+
+
+\setbeamercolor*{example body}{fg=white,bg=JDMscheme4}
+\setbeamercolor*{example title}{fg=white,bg=JDMscheme1}
+
+
+%  \setbeamercolor{framesubtitle}{fg=ta3orange, bg=ta2gray}
+%  \setbeamercolor{author in head/foot}{fg=tabutter, bg=black}
+%  \setbeamercolor{title in head/foot}{bg=tabutter, fg=black}
+
+
+\setbeamercolor{alerted text}{fg=JDMalert}
+
+
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{navigation symbols}{}  % no navigation on a poster
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{block begin}{
+  \vskip.75ex
+  \begin{beamercolorbox}[rounded=true,leftskip=1cm,colsep*=.75ex]{block title}%
+    \usebeamerfont*{block title}\insertblocktitle
+  \end{beamercolorbox}%
+  {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[rounded=true,colsep*=.75ex,sep=.75ex,vmode]{block body}%
+    \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+  }
+  \setbeamertemplate{block end}{
+  \end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{headline}{  
+  \leavevmode
+%% If one of the institutes does not apply to you, comment out the includegraphics line. You may have to move the logos around a little if you end up removing one.
+  \begin{beamercolorbox}[wd=\paperwidth]{headline}
+    \begin{columns}[c]
+      \begin{column}{.15\paperwidth}
+         \begin{center}
+           \includegraphics[width=0.5\linewidth]{icons/uw.png}   %university logo
+         \end{center}
+         \vskip1ex
+      \end{column}
+      
+     \begin{column}{.7\paperwidth}
+        \vskip4ex
+%        \raggedleft
+		\centering
+        \usebeamercolor{title in headline}{\color{fg}\textbf{\Huge{\inserttitle}}\\[3ex]}
+        \usebeamercolor{author in headline}{\color{fg}\huge{\insertinstitute}\\[1ex]}
+        % \usebeamercolor{institute in headline}{\color{fg}\large{\insertinstitute}\\[1ex]}    
+                \vskip1ex 
+      \end{column}
+      
+      \begin{column}{.15\paperwidth}
+
+        \begin{center}
+         \includegraphics[width=1\linewidth]{icons/corl.png}   %conference logo
+        \end{center}
+                \vskip1ex 
+      \end{column}
+ 
+      
+    \end{columns}
+  \end{beamercolorbox}
+  
+%%      \begin{beamercolorbox}[sep=0.1cm,wd=.1\paperwidth,center]{logo in headline}
+%%        \vskip2ex
+%%      \end{beamercolorbox}  
+%%      \begin{beamercolorbox}[sep=1cm,wd=.7\paperwidth]{headline}
+%%        \usebeamercolor{title in headline}{\raggedright\color{fg}\textbf{\LARGE{\inserttitle}}\\[1ex]}
+%%        \usebeamercolor{author in headline}{\raggedright\color{fg}\large{\insertauthor}\\[1ex]}
+%%        \usebeamercolor{institute in headline}{\raggedright\color{fg}\large{\insertinstitute}\\[1ex]}     
+%%      \end{beamercolorbox}%
+%%      \begin{beamercolorbox}[sep=0.1cm,wd=.18\paperwidth,center]{logo in headline}
+%%        \includegraphics[height=5cm]{logos/rwth-hks44}
+%%        \vskip2ex
+%%      \end{beamercolorbox}  
+%%    \end{beamercolorbox}
+  
+  \begin{beamercolorbox}[wd=\paperwidth]{lower separation line head}
+  \ \\
+    \rule{0pt}{5pt}
+  \end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{footline}{
+%  \begin{beamercolorbox}[wd=\paperwidth]{upper separation line foot}
+%    \rule{0pt}{3pt}
+%  \end{beamercolorbox}
+  
+  \begin{beamercolorbox}[ht=4ex,leftskip=1cm,rightskip=1.5cm]{footline}%
+\texttt{jdtho@cs.washington.edu} \hfill  \texttt{} \hfill \texttt{https://arxiv.org/abs/1907.04957}
+    \vskip1ex
+  \end{beamercolorbox}
+
+%  \begin{beamercolorbox}[wd=\paperwidth]{lower separation line foot}
+%    \rule{0pt}{3pt}
+%  \end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<all>
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "poster"
+%%% TeX-PDF-mode: t
+%%% End: 

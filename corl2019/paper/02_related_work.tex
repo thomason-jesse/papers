@@ -1,0 +1,93 @@
+
+Dialogs in \dataset{} begin with an underspecified, ambiguous instruction analogous to what robots may encounter in a home environment (e.g., ``Go to the room with the bed'').
+Dialogs include both navigation and question asking / answering to guide the search, akin to a robot agent asking for clarification when moving through a new environment.
+Table~\ref{tab:rw_comparison} summarizes how \dataset{} combines the strengths and difficulties of a subset of existing navigation and question answering tasks.
+
+\paragraph{Vision-and-Language Navigation.}
+% MARCO http://www.cs.utexas.edu/users/ml/clamp/navigation/
+% DRIF https://github.com/lil-lab/drif
+% R2R https://arxiv.org/pdf/1711.07280.pdf
+% Touchdown https://arxiv.org/pdf/1811.12354.pdf
+Early, simulator-based Vision-and-Language Navigation (VLN) tasks use language instructions that are unambiguous---designed to uniquely describe the goal---and fully specified---describing the steps necessary to reach the goal~\cite{macmahon:aaai06,chen:aaai11}.
+In a more recent setting, a simulated quadcopter drone uses low-level controls to follow a route described in natural language~\cite{blukis:corl18}.
+In photorealistic simulation environments, agents can navigate high-definition scans of indoor scenes~\cite{anderson:cvpr18} or large, outdoor city spaces~\cite{chen:cvpr19}.
+% EQA https://embodiedqa.org/paper.pdf
+% IQA https://arxiv.org/abs/1712.03316
+In interactive question answering~\cite{das:cvpr18,gordon2018iqa} settings, the language context is a single question (e.g., ``What color is the car?'') that requires navigation to answer.
+The questions serve as underspecified instructions, but are unambiguous (e.g., there is only one car whose color can be asked about).
+These questions are generated from templates rather than human language.
+% How we differ.
+In \dataset{}, input is an underspecified hint about the goal location (e.g., ``The goal room has a sink'') requiring exploration and dialog to resolve.
+Rather than single instructions, \dataset{} includes two-sided, human-human dialogs.
+
+\paragraph{Question Answering and Dialog.}
+% CLEVR https://arxiv.org/pdf/1612.06890.pdf
+% VQA https://arxiv.org/pdf/1505.00468.pdf hudson:cvpr18
+% CLEVR-Dialog https://arxiv.org/pdf/1903.03166.pdf
+% VisDial https://arxiv.org/pdf/1611.08669.pdf
+In Visual Question Answering (VQA), agents answer language questions about a static image.
+These tasks exist for templated language on rendered images~\cite{johnson:cvpr17} and human language on real-world images~\cite{antol:iccv15,hudson:cvpr18,zellers:cvpr19}.
+Later extensions feature two-sided dialog, where a series of question-answer pairs provide context for the next question~\cite{kottur:naacl19,das:cvpr17}.
+% QuAC https://arxiv.org/pdf/1808.07036.pdf
+% CoQa https://arxiv.org/pdf/1808.07042.pdf
+% Sharc https://arxiv.org/pdf/1809.01494.pdf
+Question answering in natural language processing is a long-studied task for questions about static text documents (e.g., the Stanford QA Dataset~\cite{rajpurkar:emnlp16}).
+Recently, this paradigm was extended to two-sided dialogs via human-human, question-answer pairs about a document~\cite{choi:emnlp18,saeidi:emnlp18,reddy:tacl19}.
+% How we differ.
+Questions in these datasets are unambiguous: they have a right answer that can be inferred from the context.
+By contrast, \dataset{} conversations begin with a hint about the goal location that is always ambiguous and requires cooperation between participants.
+Contrasting VQA, because \dataset{} extends navigation the visual context is temporally dynamic---new visual observations arrive at each timestep.
+
+\begin{table}[ht!]
+\centering
+\begin{small}
+\begin{tabular}{lccccccc}
+    \textbf{Dataset} & \multicolumn{4}{c}{\textbf{---Language Context---}} & \multicolumn{3}{c}{\textbf{---Visual Context---}} \\
+    & Human & Amb & UnderS & Temporal & Real-world & Temporal & Shared \\
+    \toprule
+MARCO\cite{macmahon:aaai06,chen:aaai11}, DRIF\cite{blukis:corl18} & \cmark & \xmark & \xmark & \bad{1I} & \xmark & \good{Dynamic} & - \\
+    R2R\cite{anderson:cvpr18}, Touchdown\cite{chen:cvpr19} & \cmark & \xmark & \xmark & \bad{1I} & \cmark & \good{Dynamic} & - \\
+    EQA\cite{das:cvpr18}, IQA\cite{gordon2018iqa} & \xmark & \xmark & \cmark & \bad{1Q} & \xmark & \good{Dynamic} & - \\
+    CLEVR\cite{johnson:cvpr17} & \xmark & \xmark & - & \bad{1Q} & \xmark & \bad{Static} & - \\
+    VQA\cite{antol:iccv15,hudson:cvpr18,zellers:cvpr19} & \cmark & \xmark & - & \bad{1Q} & \cmark & \bad{Static} & - \\
+    CLEVR-Dialog\cite{kottur:naacl19} & \xmark & \xmark & - & \good{2D} & \xmark & \bad{Static} & \cmark \\
+    VisDial\cite{das:cvpr17} & \cmark & \xmark & - & \good{2D} & \cmark & \bad{Static} & \cmark \\
+    VLNA\cite{nguyen:cvpr19}, HANNA\cite{nguyen:emnlp19} & \xmark & \cmark & \cmark & \neutral{1D} & \cmark & \good{Dynamic} & \xmark \\
+    TtW\cite{devries:arxiv18} & \cmark & \xmark & \cmark & \good{2D} & \cmark & \good{Dynamic} & \xmark \\
+    \midrule
+    \dataset{} & \cmark & \cmark & \cmark & \good{2D} & \cmark & \good{Dynamic} & \cmark \\
+    \bottomrule
+\end{tabular}
+\end{small}
+\caption{
+Compared to existing datasets involving vision and language input for navigation and question answering, \dataset{} is the first to include two-sided dialogs held in natural language, with the initial navigation instruction being both ambiguous (\textit{Amb}) and underspecified (\textit{UnderS}), and situated in a photorealistic, visual navigation environment viewed by both speakers.
+For temporal language context, we note single navigation instructions (\textit{1I}) and questions (\textit{1Q}) versus 1-sided (\textit{1D}) and 2-sided (\textit{2D}) dialogs.
+}
+\vspace{-6mm}
+\label{tab:rw_comparison}
+\end{table}
+
+\paragraph{Task-oriented Dialog.}
+% Joyce object identification https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/view/10000/9555 liu:aaai15
+% Tellex inverse semantics http://cs.brown.edu/courses/csci2951-k/papers/tellex14.pdf tellex:rss14
+% VLNA https://arxiv.org/pdf/1812.04155.pdf
+In human-robot collaboration, robot language requests for human help can be generated to elicit non-verbal human help (e.g, moving a table leg to be within reach for the robot)~\cite{tellex:rss14}.
+However, humans may use language to respond to robot requests for help in task-oriented dialogs~\cite{thomason:icra19,williams:auro19,marge:naacl19}.
+Recent work adds requesting navigation help as an action, but the response either comes in the form of templated language that encodes gold-standard planner action sequences~\cite{nguyen:cvpr19} or as an automatic generation trained from human instructions and coupled with a visual goal frame as additional supervision~\cite{nguyen:emnlp19}.
+Past work introduced Talk the Walk (TtW)~\cite{devries:arxiv18}, where two humans communicate to reach a goal location in a photorealistic, outdoor environment.
+In TtW, the guiding human does not have an egocentric view of the environment, but an abstracted semantic map, and so language grounding centers around semantic elements like ``bank'' and ``restaurant'' rather than visual features, and the target location is unambiguously shown to the guide from the start.
+In \dataset{}, a \nav{} human generates language requests for help, and an \ora{} human answers in language conditioned on higher-level, visual observations of what a shortest-path planner would do next, with both players observing the same, egocentric visual context.
+In some ways, \dataset{} echoes several older human-human, spoken dialog corpora like the HCRC Map Task~\cite{anderson:ls91}, SCARE~\cite{stoia:lrec08}, and CReST~\cite{eberhard:lrec10}, but these are substantially smaller and have fewer and less rich environments.
+
+\paragraph{Background: Matterport Simulator and the Room-2-Room Task.}
+We build on the R2R task~\cite{anderson:cvpr18} and train navigation agents using the same simulator and API.
+MatterPort contains 90 3D house scans, with each scan $S$ divided into visual panoramas $p\in S$ (nodes which a navigation agent can occupy) accompanied by an adjacency matrix $A_S$.
+We differentiate between the \textit{steps} and \textit{distance} between $p$ and $q$---\textit{steps} represent the number of intervening nodes $d_h$, while \textit{distance} is defined in meters as $d_m$.
+Step distance $d_h(p, q)$ is the number of hops through $A_S$ to get from node $p$ to node $q$.
+The distance in meters $d_m(p, q)$ is defined as physical distance if $A_S[p,q] = 1$ or the shortest route between $p$ and $q$ otherwise.
+On average, $1$ step corresponds to $2.25$ meters.
+
+At each timestep, an agent emits a navigation action taken in the simulated environment.
+The actions are to turn \textit{left} or \textit{right}, tilt \textit{up} or \textit{down}, move \textit{forward} to an adjacent node, or \textit{stop}.
+After taking any action except \textit{stop}, the agent receives a new visual observation from the environment.
+The \textit{forward} action is only available if the agent is facing an adjacent node.
