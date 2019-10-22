@@ -1,0 +1,19 @@
+% Introduce dataset and motivate use for the CoRL audience - teleopration and guidance through NL interface.
+Dialog-enabled smart assistants, which communicate via natural language and occupy human homes, have seen widespread adoption in recent years.
+These systems can communicate information, but do not manipulate objects or actuate.
+By contrast, manipulation-capable and mobile robots are still largely deployed in industrial settings, but do not interact with human users.
+Dialog-enabled robots can bridge this gap, with natural language interfaces helping robots and non-experts collaborate to achieve their goals~\cite{tellex:rss14,chai:ijcai18,thomason:icra19,murnane:siggraph19,williams:auro19}.
+
+Navigating successfully from place to place is a fundamental need for a robot in a human environment and can be facilitated, as with smart assistants, through dialog.
+To study this challenge, we introduce \datasetfull{} (\dataset{}), an English language dataset situated in the Matterport Room-2-Room (R2R) simulation environment~\cite{chang:3dv17,anderson:cvpr18} (Figure~\ref{fig:full_demo}).
+\dataset{} can be used to train navigation agents, such as language teleoperated  home and office robots, that ask targeted questions about where to go next when unsure.
+Additionally, \dataset{} can be used to train agents that can answer such questions given expert knowledge of the environment to enable automated language guidance for humans in unfamiliar places (e.g., asking for directions in an office building).
+The photorealistic environment used in \dataset{} may enable agents trained in simulation to conduct and understand dialog from humans to transfer those skills to the real world.
+The dialogs in \dataset{} contain nearly three times as many words as R2R instructions, and cover average path lengths more than three times longer than paths in R2R.
+
+In Section~\ref{sec:related_work} we situate the Vision-and-Dialog Navigation paradigm.
+After introducing \dataset{} (Section~\ref{sec:dataset}), we create the \taskfull{} (\task{}) task with over 7k instances from \dataset{} dialogs (Section~\ref{sec:task}).
+We evaluate an initial, sequence-to-sequence model on this task (Section~\ref{sec:experiments}).
+The sequence-to-sequence model encodes the human-human dialog so far and uses it to infer navigation actions to get closer to a goal location.
+We find that agents perform better with more dialog history and when mixing human and planner supervision during training.
+We conclude with next directions for creating tasks from \dataset{}, such as two learning agents that must be trained cooperatively, and more nuanced models for \task{}, where our initial sequence-to-sequence model leaves headroom between its performance and human-level performance (Section~\ref{sec:conclusion}).
