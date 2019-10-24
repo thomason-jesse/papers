@@ -214,7 +214,7 @@ The average percent of \textit{Dialogs}, as well as individual \nav{} and \ora{}
 
 \begin{figure}[!t]
   \centering
-  \includegraphics[width=\linewidth]{figures/full_demo_vertical.pdf}
+  \includegraphics[width=0.95\linewidth]{figures/full_demo_vertical.pdf}
 \end{figure}
 
 \begin{figure}
@@ -234,7 +234,8 @@ The average percent of \textit{Dialogs}, as well as individual \nav{} and \ora{}
   \vspace{1mm}
 \justifying{\setsize
 
-
+For each question-answer exchange, we task an agent with navigating towards the goal given the dialog so far.
+We can use the path taken by the \nav{}, shown to the \ora{}, or a \emph{mix} as supervision.
 
 }
 \end{block}
@@ -291,6 +292,12 @@ Among ablations, \textbf{bold} indicates most progress by language input, and \g
 \end{small}
 \vspace{-7mm}
 \end{table}
+
+Using all dialog history significantly outperforms unimodal ablations in \textit{unseen} environments.
+Using all dialog history, rather than just the last question or question-answer exchange, is needed to achieve statistically significantly better performance than using the target object alone in \textit{unseen} test environments.
+Dialog history is beneficial for understanding the context of the latest navigation instruction $A_i$.
+Models trained with mixed supervision always statistically significantly outperform those trained with oracle or navigator supervision.
+Using human demonstrations only when they appear trustworthy increases agent progress towards the goal.
 
 }
 \end{block}
